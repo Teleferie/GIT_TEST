@@ -1,29 +1,29 @@
 name: Basic CI Workflow
 
 on:
- push:
-  branches: [ main, develop ]
- pull_request:
-  branches: [ main ]
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
- build:
-  runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-  steps:
-  - name: Checkout kodu
-   uses: actions/checkout@v3
+    steps:
+      - name: Checkout kodu
+        uses: actions/checkout@v3
 
-  - name: Wyświetl informacje o systemie
-   run: |
-    echo "=== System Info ==="
-    uname -a
-    pwd
-    ls -la
+      - name: Wyświetl informacje o systemie
+        run: |
+          echo "=== System Info ==="
+          uname -a
+          pwd
+          ls -la
 
-  - name: Wyświetl zmienne środowiskowe GitHub
-   run: |
-    echo "GitHub Event: ${{ github.event_name }}"
-    echo "Repository: ${{ github.repository }}"
-    echo "Branch: ${{ github.ref }}"
-    echo "Commit SHA: ${{ github.sha }}"
+      - name: Wyświetl zmienne środowiskowe GitHub
+        run: |
+          echo "GitHub Event: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Commit SHA: ${{ github.sha }}"
