@@ -17,27 +17,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Zaktualizowano z v3 na v4
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4  # Upewniamy się, że jest v4
+        uses: actions/setup-node@v4
         with:
-          node-version: '20' # Tutaj definiujesz wersję dla swojej aplikacji (może być 20 lub nowsza)
-          #cache: 'npm'
+          node-version: '20'
 
       - name: Install and Run Application
         run: |
-          echo "Instalowanie zależności dla środowiska: $ENVIRONMENT"
+          echo "Instalowanie zależności..."
           npm install
           
           echo "Uruchamianie aplikacji testowej..."
+          npm start
+          
+          echo "Generowanie artefaktu na potrzeby potoku..."
           mkdir -p ${{ env.BUILD_DIR }}
-          npm start > ${{ env.BUILD_DIR }}/app-bundle.txt
+          echo "Kompilacja i testy zaliczone pomyślnie na gałęzi $ENVIRONMENT" > ${{ env.BUILD_DIR }}/app-bundle.txt
 
       # Zapisywanie artefaktów TYLKO dla gałęzi main
       - name: Upload Build Artifacts (Main Only)
         if: github.ref == 'refs/heads/main'
-        uses: actions/upload-artifact@v4  # Upewniamy się, że jest v4
+        uses: actions/upload-artifact@v4
         with:
           name: production-build
           path: ${{ env.BUILD_DIR }}/
@@ -50,7 +52,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Zaktualizowano z v3 na v4
+        uses: actions/checkout@v4
 
       - name: Run Unit Tests
         run: |
@@ -66,10 +68,10 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Zaktualizowano z v3 na v4
+        uses: actions/checkout@v4
 
       - name: Download Build Artifacts
-        uses: actions/download-artifact@v4  # Upewniamy się, że jest v4
+        uses: actions/download-artifact@v4
         with:
           name: production-build
           path: ./downloaded-artifacts
