@@ -29,12 +29,12 @@ jobs:
           echo "Instalowanie zależności..."
           npm install
           
-          echo "Uruchamianie aplikacji bezpośrednio przez Node..."
-          node src/app.js
+          echo "Uruchamianie aplikacji..."
+          npm start
           
-          echo "Generowanie artefaktu na potrzeby potoku..."
+          echo "Generowanie artefaktu..."
           mkdir -p ${{ env.BUILD_DIR }}
-          echo "Kompilacja i testy zaliczone pomyślnie na gałęzi $ENVIRONMENT" > ${{ env.BUILD_DIR }}/app-bundle.txt
+          echo "Kompilacja i testy zaliczone na gałęzi $ENVIRONMENT" > ${{ env.BUILD_DIR }}/app-bundle.txt
 
       # Zapisywanie artefaktów TYLKO dla gałęzi main
       - name: Upload Build Artifacts (Main Only)
