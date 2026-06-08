@@ -29,8 +29,8 @@ jobs:
           echo "Instalowanie zależności..."
           npm install
           
-          echo "Uruchamianie aplikacji testowej..."
-          npm start
+          echo "Uruchamianie aplikacji bezpośrednio przez Node..."
+          node src/app.js
           
           echo "Generowanie artefaktu na potrzeby potoku..."
           mkdir -p ${{ env.BUILD_DIR }}
