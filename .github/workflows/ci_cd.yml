@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v4  # Upewniamy się, że jest v4
         with:
           node-version: '20' # Tutaj definiujesz wersję dla swojej aplikacji (może być 20 lub nowsza)
-          cache: 'npm'
+          #cache: 'npm'
 
       - name: Install and Run Application
         run: |
